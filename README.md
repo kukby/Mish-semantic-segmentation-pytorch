@@ -8,6 +8,23 @@ In 2019, Google proposed a new activation function-Mish for the machine learning
 For example, the ResNet generally has been constituted by the Convolution layers, Pooling layers, and Softmax layer. Before the Mish function has been raised, the cell of the Convolution layer is made up of the Convolution and the Activation function, which is usually used ReLU function. Now, we change the Convolution layers that use the Mish function to replace the ReLU function. Then we use the modified network structure in the task of the semantic segmentation.
 
 The Mish function is created for the task of the image classification. In this task it got the Top-1 Accuracy while for Generative Networks and Image Segmentation the Loss Metric. Therefore, we considered that if we use this function in the Semantic Segmentation task, we will get such a good result.
+
+---
+<table><tbody>
+    <th valign="bottom">Architecture</th>
+    <th valign="bottom">MultiScale Testing</th>
+    <th valign="bottom">Mean IoU</th>
+    <th valign="bottom">Pixel Accuracy(%)</th>
+    <th valign="bottom">Overall Score</th>
+    <tr>
+        <td rowspan="2">ResNet18dilated + PPM_deepsup</td>
+        <td>Yes</td><td>39.14</td><td>79.18</td><td>59.16</td>        
+    <tr>
+    <tr>
+    <td rowspan="2">UperNet50</td>
+    <td>Yes</td><td>41.08</td><td>79.21</td><td>60.15</td> 
+    </tr>
+
 ### Mish: A Self Regularized Non-Monotonic Neural Activation Function 
 
 Mish is a Self Regularized Non-Monotonic Neural Activation Function. Activation Function serves a core functionality in the training process of a Neural Network Architecture and is represented by the basic mathematical representation:.
