@@ -198,6 +198,6 @@ Misra D. Mish: A Self Regularized Non-Monotonic Neural Activation Function[J]. a
 
 ### TO DO
 
-TO try all the Semantic-Segmentation Model by Mish.
+test all the Semantic-Segmentation Neural Network Model by Mish.
 
-Complete all test data by Mish in the Semantic-segmentation.
+Complete all test data by Mish in the task of Semantic-segmentation.
