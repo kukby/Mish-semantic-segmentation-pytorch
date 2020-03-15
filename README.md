@@ -1,4 +1,3 @@
-# Mish-semantic-segmentation-pytorch
 # Mish-Semantic Segmentation on MIT ADE20K dataset in PyTorch
 
 This is a PyTorch implementation of semantic segmentation models on MIT ADE20K scene parsing dataset.
@@ -27,7 +26,6 @@ IMPORTANT: The base ResNet in our repository is a customized (different from the
     <td rowspan="2">UperNet50</td>
     <td>Yes</td><td>41.08</td><td>79.21</td><td>60.15</td> 
     </tr>
-
 The training is benchmarked on a server with 4 NVIDIA Tesla V100 GPUs (16GB GPU memory). The inference speed is benchmarked a single NVIDIA Pascal 1080ti GPU, with visualization.
 
 ![image-20200314065230515](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200314065230515.png)
@@ -43,21 +41,17 @@ For the task of semantic segmentation. we usually found that many activation fun
 We use the Mish function  to replace the ReLU function which is used in this generally semantic segmentation.
 
 ### Dynamic scales of input for training with multiple GPUs 
-
 For the task of semantic segmentation, it is good to keep aspect ratio of images during training. So we re-implement the `DataParallel` module, and make it support distributing data to multiple GPUs in python dict, so that each gpu can process images of different sizes. At the same time, the dataloader also operates differently. 
 
 <sup>*Now the batch size of a dataloader always equals to the number of GPUs*, each element will be sent to a GPU. It is also compatible with multi-processing. Note that the file index for the multi-processing dataloader is stored on the master process, which is in contradict to our goal that each worker maintains its own file list. So we use a trick that although the master process still gives dataloader an index for `__getitem__` function, we just ignore such request and send a random batch dict. Also, *the multiple workers forked by the dataloader all have the same seed*, you will find that multiple workers will yield exactly the same data, if we use the above-mentioned trick directly. Therefore, we add one line of code which sets the defaut seed for `numpy.random` before activating multiple worker in dataloader.</sup>
 
 ### State-of-the-Art models
-
 - **PSPNet** is scene parsing network that aggregates global representation with Pyramid Pooling Module (PPM). It is the winner model of ILSVRC'16 MIT Scene Parsing Challenge. Please refer to [https://arxiv.org/abs/1612.01105](https://arxiv.org/abs/1612.01105) for details.
 - **UPerNet** is a model based on Feature Pyramid Network (FPN) and Pyramid Pooling Module (PPM). It doesn't need dilated convolution, an operator that is time-and-memory consuming. *Without bells and whistles*, it is comparable or even better compared with PSPNet, while requiring much shorter training time and less GPU memory. Please refer to [https://arxiv.org/abs/1807.10221](https://arxiv.org/abs/1807.10221) for details.
 - **HRNet** is a recently proposed model that retains high resolution representations throughout the model, without the traditional bottleneck design. It achieves the SOTA performance on a series of pixel labeling tasks. Please refer to [https://arxiv.org/abs/1904.04514](https://arxiv.org/abs/1904.04514) for details.
 
 
 ## Supported models
-
-
 
 We split our models into encoder and decoder, where encoders are usually modified directly from classification networks, and decoders consist of final convolutions and upsampling. We have provided some pre-configured models in the ```config``` folder.
 
@@ -75,7 +69,6 @@ Encoder:
 - HRNetV2 (W48)
 
 Decoder:
-
 - C1 (one convolution module)
 - C1_deepsup (C1 + deep supervision trick)
 - PPM (Pyramid Pooling Module, see [PSPNet](https://hszhao.github.io/projects/pspnet) paper for details.)
@@ -83,7 +76,6 @@ Decoder:
 - UPerNet (Pyramid Pooling + FPN head, see [UperNet](https://arxiv.org/abs/1807.10221) for details.)
 
 ## Environment
-
 The code is developed under the following configurations.
 
 - Hardware: >=4 GPUs for training, >=1 GPU for testing (set ```[--gpus GPUS]``` accordingly)
@@ -91,14 +83,12 @@ The code is developed under the following configurations.
 - Dependencies: numpy, scipy, opencv, yacs, tqdm
 
 ## Quick start: Test on an image using our trained model 
-
 1. Here is a simple demo to do inference on a single image:
 
 ```bash
 chmod +x demo_test.sh
 ./demo_test.sh
 ```
-
 This script downloads a trained model (ResNet50dilated + PPM_deepsup) and a test image, runs the test script, and saves predicted segmentation (.png) to the working directory.
 
 2. To test on an image or a folder of images (```$PATH_IMG```), you can simply do the following:
@@ -108,20 +98,16 @@ python3 -u test.py --imgs $PATH_IMG --gpu $GPU --cfg $CFG
 ```
 
 ## Training
-
 1. Download the ADE20K scene parsing dataset:
 
 ```bash
 chmod +x download_ADE20K.sh
 ./download_ADE20K.sh
 ```
-
 2. Train a model by selecting the GPUs (```$GPUS```) and configuration file (```$CFG```) to use. During training, checkpoints by default are saved in folder ```ckpt```.
-
 ```bash
 python3 train.py --gpus $GPUS --cfg $CFG 
 ```
-
 - To choose which gpus to use, you can either do ```--gpus 0-7```, or ```--gpus 0,2,4,6```.
 
 ​       For example, you can start with our provided configurations: 
@@ -148,7 +134,6 @@ python3 train.py --gpus GPUS --cfg config/ade20k-resnet101-upernet.yaml
 
 
 ## Evaluation
-
 1. Evaluate a trained model on the validation set. Add ```VAL.visualize True``` in argument to output visualizations as shown in teaser.
 
    For example:
