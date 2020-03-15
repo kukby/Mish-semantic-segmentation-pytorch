@@ -12,6 +12,7 @@ model_urls = {
     #'resnext50': 'http://sceneparsing.csail.mit.edu/model/pretrained_resnet/resnext50-imagenet.pth',
     'resnext101': 'http://sceneparsing.csail.mit.edu/model/pretrained_resnet/resnext101-imagenet.pth'
 }
+#Mish function
 from torch.nn import functional as F
 class Mish(nn.Module):
     def __init__(self):
