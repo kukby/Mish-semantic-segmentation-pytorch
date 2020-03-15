@@ -207,7 +207,7 @@ IMPORTANT: The base ResNet in our repository is a customized (different from the
 
 The training is benchmarked on a server with 4 NVIDIA Tesla V100 GPUs (16GB GPU memory). The inference speed is benchmarked a single NVIDIA Pascal 1080ti GPU, with visualization.
 
-![image-20200314065230515](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200314065230515.png)
-![image-20200314065245560](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200314065245560.png)
+![image-20200314065230515](https://github.com/kukby/Mish-semantic-segmentation-pytorch/blob/master/1.png)
+![image-20200314065245560](https://github.com/kukby/Mish-semantic-segmentation-pytorch/blob/master/2.png)
 [From left to right: Test Image, Ground Truth, Predicted Result（PSPNet-ResNet18） Predicted Result（Mish-PSPNet-ResNet18）]
 
