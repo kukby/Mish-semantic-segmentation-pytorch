@@ -22,6 +22,8 @@ model_urls = {
     'hrnetv2': 'http://sceneparsing.csail.mit.edu/model/pretrained_resnet/hrnetv2_w48-imagenet.pth',
 }
 
+#Mish function
+
 class Mish(nn.Module):
     def __init__(self):
         super().__init__()
