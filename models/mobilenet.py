@@ -17,7 +17,7 @@ __all__ = ['mobilenetv2']
 model_urls = {
     'mobilenetv2': 'http://sceneparsing.csail.mit.edu/model/pretrained_resnet/mobilenet_v2.pth.tar',
 }
-
+#Mish function
 from torch.nn import functional as F
 class Mish(nn.Module):
     def __init__(self):
