@@ -4,18 +4,18 @@ import torchvision
 from . import resnet, resnext, mobilenet, hrnet
 from lib.nn import SynchronizedBatchNorm2d
 BatchNorm2d = SynchronizedBatchNorm2d
+#Mish function
+from torch.nn import functional as F
+class Mish(nn.Module):
+    def __init__(self):
+        super().__init__()
+        print("Mish Resnext activation loaded...")
 
-#from torch.nn import functional as F
-#class Mish(nn.Module):
-#    def __init__(self):
-#        super().__init__()
-#        print("Mish Resnext activation loaded...")
-
-#    def forward(self, x):  
+    def forward(self, x):  
         #save 1 second per epoch with no x= x*() and then return x...just inline it.
-#        x = x *( torch.tanh(F.softplus(x)))
-#        return x 
-#act_fn = Mish() #nn.ReLU(inplace=True)
+        x = x *( torch.tanh(F.softplus(x)))
+        return x 
+act_fn = Mish() #nn.ReLU(inplace=True)
 class SegmentationModuleBase(nn.Module):
     def __init__(self):
         super(SegmentationModuleBase, self).__init__()
@@ -174,8 +174,8 @@ def conv3x3_bn_relu(in_planes, out_planes, stride=1):
             nn.Conv2d(in_planes, out_planes, kernel_size=3,
                       stride=stride, padding=1, bias=False),
             BatchNorm2d(out_planes),
-#            act_fn,
-            nn.ReLU(inplace=True),
+            act_fn,
+#            nn.ReLU(inplace=True),
             )
 
 
@@ -410,8 +410,8 @@ class PPM(nn.Module):
                 nn.AdaptiveAvgPool2d(scale),
                 nn.Conv2d(fc_dim, 512, kernel_size=1, bias=False),
                 BatchNorm2d(512),
-#                act_fn
-                nn.ReLU(inplace=True)
+                act_fn
+#                nn.ReLU(inplace=True)
             ))
         self.ppm = nn.ModuleList(self.ppm)
 
@@ -419,8 +419,8 @@ class PPM(nn.Module):
             nn.Conv2d(fc_dim+len(pool_scales)*512, 512,
                       kernel_size=3, padding=1, bias=False),
             BatchNorm2d(512),
-#            act_fn,
-            nn.ReLU(inplace=True),
+            act_fn,
+#            nn.ReLU(inplace=True),
             nn.Dropout2d(0.1),
             nn.Conv2d(512, num_class, kernel_size=1)
         )
@@ -461,8 +461,8 @@ class PPMDeepsup(nn.Module):
                 nn.AdaptiveAvgPool2d(scale),
                 nn.Conv2d(fc_dim, 512, kernel_size=1, bias=False),
                 BatchNorm2d(512),
-#                act_fn
-                nn.ReLU(inplace=True)
+                act_fn
+#                nn.ReLU(inplace=True)
             ))
         self.ppm = nn.ModuleList(self.ppm)
         self.cbr_deepsup = conv3x3_bn_relu(fc_dim // 2, fc_dim // 4, 1)
@@ -471,8 +471,8 @@ class PPMDeepsup(nn.Module):
             nn.Conv2d(fc_dim+len(pool_scales)*512, 512,
                       kernel_size=3, padding=1, bias=False),
             BatchNorm2d(512),
-#            act_fn,
-            nn.ReLU(inplace=True),
+            act_fn,
+#            nn.ReLU(inplace=True),
             nn.Dropout2d(0.1),
             nn.Conv2d(512, num_class, kernel_size=1)
         )
@@ -528,8 +528,8 @@ class UPerNet(nn.Module):
             self.ppm_conv.append(nn.Sequential(
                 nn.Conv2d(fc_dim, 512, kernel_size=1, bias=False),
                 BatchNorm2d(512),
-#                act_fn
-                nn.ReLU(inplace=True)
+                act_fn
+#                nn.ReLU(inplace=True)
             ))
         self.ppm_pooling = nn.ModuleList(self.ppm_pooling)
         self.ppm_conv = nn.ModuleList(self.ppm_conv)
@@ -541,8 +541,8 @@ class UPerNet(nn.Module):
             self.fpn_in.append(nn.Sequential(
                 nn.Conv2d(fpn_inplane, fpn_dim, kernel_size=1, bias=False),
                 BatchNorm2d(fpn_dim),
-#                act_fn
-                nn.ReLU(inplace=True)
+                act_fn
+#                nn.ReLU(inplace=True)
             ))
         self.fpn_in = nn.ModuleList(self.fpn_in)
 
