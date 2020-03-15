@@ -8,32 +8,6 @@ In 2019, Google proposed a new activation function-Mish for the machine learning
 For example, the ResNet generally has been constituted by the Convolution layers, Pooling layers, and Softmax layer. Before the Mish function has been raised, the cell of the Convolution layer is made up of the Convolution and the Activation function, which is usually used ReLU function. Now, we change the Convolution layers that use the Mish function to replace the ReLU function. Then we use the modified network structure in the task of the semantic segmentation.
 
 The Mish function is created for the task of the image classification. In this task it got the Top-1 Accuracy while for Generative Networks and Image Segmentation the Loss Metric. Therefore, we considered that if we use this function in the Semantic Segmentation task, we will get such a good result.
-
-### Performance
-
-IMPORTANT: The base ResNet in our repository is a customized (different from the one in torchvision). The base models will be automatically downloaded when needed.
-
-<table><tbody>
-    <th valign="bottom">Architecture</th>
-    <th valign="bottom">MultiScale Testing</th>
-    <th valign="bottom">Mean IoU</th>
-    <th valign="bottom">Pixel Accuracy(%)</th>
-    <th valign="bottom">Overall Score</th>
-    <tr>
-        <td rowspan="2">ResNet18dilated + PPM_deepsup</td>
-        <td>Yes</td><td>39.14</td><td>79.18</td><td>59.16</td>        
-    <tr>
-    <tr>
-    <td rowspan="2">UperNet50</td>
-    <td>Yes</td><td>41.08</td><td>79.21</td><td>60.15</td> 
-    </tr>
-
-The training is benchmarked on a server with 4 NVIDIA Tesla V100 GPUs (16GB GPU memory). The inference speed is benchmarked a single NVIDIA Pascal 1080ti GPU, with visualization.
-
-![image-20200314065230515](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200314065230515.png)
-![image-20200314065245560](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200314065245560.png)
-[From left to right: Test Image, Ground Truth, Predicted Result（PSPNet-ResNet18） Predicted Result（Mish-PSPNet-ResNet18）]
-
 ### Mish: A Self Regularized Non-Monotonic Neural Activation Function 
 
 Mish is a Self Regularized Non-Monotonic Neural Activation Function. Activation Function serves a core functionality in the training process of a Neural Network Architecture and is represented by the basic mathematical representation:.
@@ -211,3 +185,29 @@ Misra D. Mish: A Self Regularized Non-Monotonic Neural Activation Function[J]. a
 TO try all the Semantic-Segmentation Model by Mish.
 
 Complete all test data by Mish in the Semantic-segmentation.
+
+### Performance
+
+IMPORTANT: The base ResNet in our repository is a customized (different from the one in torchvision). The base models will be automatically downloaded when needed.
+
+<table><tbody>
+    <th valign="bottom">Architecture</th>
+    <th valign="bottom">MultiScale Testing</th>
+    <th valign="bottom">Mean IoU</th>
+    <th valign="bottom">Pixel Accuracy(%)</th>
+    <th valign="bottom">Overall Score</th>
+    <tr>
+        <td rowspan="2">ResNet18dilated + PPM_deepsup</td>
+        <td>Yes</td><td>39.14</td><td>79.18</td><td>59.16</td>        
+    <tr>
+    <tr>
+    <td rowspan="2">UperNet50</td>
+    <td>Yes</td><td>41.08</td><td>79.21</td><td>60.15</td> 
+    </tr>
+
+The training is benchmarked on a server with 4 NVIDIA Tesla V100 GPUs (16GB GPU memory). The inference speed is benchmarked a single NVIDIA Pascal 1080ti GPU, with visualization.
+
+![image-20200314065230515](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200314065230515.png)
+![image-20200314065245560](C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20200314065245560.png)
+[From left to right: Test Image, Ground Truth, Predicted Result（PSPNet-ResNet18） Predicted Result（Mish-PSPNet-ResNet18）]
+
