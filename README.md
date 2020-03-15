@@ -10,20 +10,26 @@ For example, the ResNet generally has been constituted by the Convolution layers
 The Mish function is created for the task of the image classification. In this task it got the Top-1 Accuracy while for Generative Networks and Image Segmentation the Loss Metric. Therefore, we considered that if we use this function in the Semantic Segmentation task, we will get such a good result.
 
 ---
-<table><tbody>
-    <th valign="bottom">Architecture</th>
-    <th valign="bottom">MultiScale Testing</th>
-    <th valign="bottom">Mean IoU</th>
-    <th valign="bottom">Pixel Accuracy(%)</th>
-    <th valign="bottom">Overall Score</th>
-    <tr>
-        <td rowspan="2">ResNet18dilated + PPM_deepsup</td>
-        <td>Yes</td><td>39.14</td><td>79.18</td><td>59.16</td>        
-    <tr>
-    <tr>
-    <td rowspan="2">UperNet50</td>
-    <td>Yes</td><td>41.08</td><td>79.21</td><td>60.15</td> 
-    </tr>
+Models | Caffe | Keras | TensorFlow | CNTK | MXNet | PyTorch  | CoreML | ONNX
+:-----:|:-----:|:-----:|:----------:|:----:|:-----:|:--------:|:------:|:-----:|
+[VGG 19](https://arxiv.org/abs/1409.1556.pdf) | √ | √ | √ | √ | √ | √ | √ | √
+[Inception V1](https://arxiv.org/abs/1409.4842v1) | √ | √ | √ | √ | √ | √ | √ | √
+[Inception V3](https://arxiv.org/abs/1512.00567)  | √ | √ | √ | √ | √ | √ | √ | √
+[Inception V4](https://arxiv.org/abs/1512.00567)  | √ | √ | √ | o | √ | √ | √ | √
+[ResNet V1](https://arxiv.org/abs/1512.03385)                               |   ×   |   √   |     √      |   o  |   √   |    √ | √ | √
+[ResNet V2](https://arxiv.org/abs/1603.05027)                               |   √   |   √   |     √      |   √  |   √   | √ | √ | √
+[MobileNet V1](https://arxiv.org/pdf/1704.04861.pdf)                        |   ×   |   √   |     √      |   o  |   √   |    √       | √ | √ | √
+[MobileNet V2](https://arxiv.org/pdf/1704.04861.pdf)                        |   ×   |   √   |     √      |   o  |   √   |    √       | √ | √ | √
+[Xception](https://arxiv.org/pdf/1610.02357.pdf)                            |   √   |   √   |     √      |   o  |   ×   |    √ | √ | √ | √
+[SqueezeNet](https://arxiv.org/pdf/1602.07360)                              |   √   |   √   |     √      |   √  |   √   |    √ | √ | √ | √
+[DenseNet](https://arxiv.org/abs/1608.06993)                                |   √   |   √   |     √      |   √  |   √   |    √       | √ | √
+[NASNet](https://arxiv.org/abs/1707.07012)                                  |   x   |   √   |     √      |   o  |   √   | √ | √ | x
+[ResNext](https://arxiv.org/abs/1611.05431)                                 |   √   |   √   |     √      |   √  |   √   | √ | √ | √ | √ | √
+[voc FCN](https://people.eecs.berkeley.edu/~jonlong/long_shelhamer_fcn.pdf) |       |       |     √      |   √  |       |
+Yolo3  
+————————————————
+版权声明：本文为CSDN博主「moyemoji」的原创文章，遵循 CC 4.0 BY-SA 版权协议，转载请附上原文出处链接及本声明。
+原文链接：https://blog.csdn.net/baidu_26646129/article/details/86700069
 
 ### Mish: A Self Regularized Non-Monotonic Neural Activation Function 
 
