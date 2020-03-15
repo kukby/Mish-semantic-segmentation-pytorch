@@ -16,10 +16,12 @@ Architecture | MultiScale Testing| Mean IoU | Pixel Accuracy(%) | Overall Score 
 |:----------------------------:|:----------------:|:-----:|:----------:|:----:|
 [ResNet18dilated + PPM_deepsup] |Yes|39.14|79.18|59.16|
 [UperNet50]                     |Yes|41.08|79.21|60.15|
+----
 The training is benchmarked on a server with 4 NVIDIA Tesla V100 GPUs (16GB GPU memory). The inference speed is benchmarked a single NVIDIA Pascal 1080ti GPU, with visualization.
 
 ![image-20200314065230515](https://github.com/kukby/Mish-semantic-segmentation-pytorch/blob/master/1.png)
 ![image-20200314065245560](https://github.com/kukby/Mish-semantic-segmentation-pytorch/blob/master/2.png)
+----
 [From left to right: Test Image, Ground Truth, Predicted Result（PSPNet-ResNet18） Predicted Result（Mish-PSPNet-ResNet18）]
 
 
