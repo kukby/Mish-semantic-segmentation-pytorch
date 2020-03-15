@@ -14,17 +14,18 @@ model_urls = {
     'resnet101': 'http://sceneparsing.csail.mit.edu/model/pretrained_resnet/resnet101-imagenet.pth'
 }
 import torch
-#from torch.nn import functional as F
-#class Mish(nn.Module):
-#    def __init__(self):
-#        super().__init__()
-#        print("Mish Resnext activation loaded...")
+#Mish function
+from torch.nn import functional as F
+class Mish(nn.Module):
+    def __init__(self):
+        super().__init__()
+        print("Mish Resnext activation loaded...")
 
-#    def forward(self, x):  
+    def forward(self, x):  
         #save 1 second per epoch with no x= x*() and then return x...just inline it.
-#        x = x *( torch.tanh(F.softplus(x)))
-#        return x 
-#act_fn = Mish() #nn.ReLU(inplace=True)
+        x = x *( torch.tanh(F.softplus(x)))
+        return x 
+act_fn = Mish() #nn.ReLU(inplace=True)
 
 def conv3x3(in_planes, out_planes, stride=1):
     "3x3 convolution with padding"
@@ -39,8 +40,8 @@ class BasicBlock(nn.Module):
         super(BasicBlock, self).__init__()
         self.conv1 = conv3x3(inplanes, planes, stride)
         self.bn1 = BatchNorm2d(planes)
-#        self.relu = act_fn
-        self.relu = nn.ReLU(inplace=True)
+        self.relu = act_fn
+#        self.relu = nn.ReLU(inplace=True)
         self.conv2 = conv3x3(planes, planes)
         self.bn2 = BatchNorm2d(planes)
         self.downsample = downsample
@@ -77,8 +78,8 @@ class Bottleneck(nn.Module):
         self.bn2 = BatchNorm2d(planes)
         self.conv3 = nn.Conv2d(planes, planes * 4, kernel_size=1, bias=False)
         self.bn3 = BatchNorm2d(planes * 4)
-        self.relu = nn.ReLU(inplace=True)
-#        self.relu = act_fn
+#        self.relu = nn.ReLU(inplace=True)
+        self.relu = act_fn
         self.downsample = downsample
         self.stride = stride
 
@@ -112,16 +113,16 @@ class ResNet(nn.Module):
         super(ResNet, self).__init__()
         self.conv1 = conv3x3(3, 64, stride=2)
         self.bn1 = BatchNorm2d(64)
-#        self.relu1 = act_fn
-        self.relu1 = nn.ReLU(inplace=True)
+        self.relu1 = act_fn
+#        self.relu1 = nn.ReLU(inplace=True)
         self.conv2 = conv3x3(64, 64)
         self.bn2 = BatchNorm2d(64)
-#        self.relu2 = act_fn
-        self.relu2 = nn.ReLU(inplace=True)  
+        self.relu2 = act_fn
+#        self.relu2 = nn.ReLU(inplace=True)  
         self.conv3 = conv3x3(64, 128)
         self.bn3 = BatchNorm2d(128)
-        self.relu3 = nn.ReLU(inplace=True) 
-#        self.relu3 = act_fn
+#        self.relu3 = nn.ReLU(inplace=True) 
+        self.relu3 = act_fn
         self.maxpool = nn.MaxPool2d(kernel_size=3, stride=2, padding=1)
 
         self.layer1 = self._make_layer(block, 64, layers[0])
